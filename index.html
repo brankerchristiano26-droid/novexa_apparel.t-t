@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVEXA APPAREL</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --card: #111111;
+            --accent: #ffffff;
+            --text-dim: #a0a0a0;
+        }
+
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; background: var(--bg); color: white; line-height: 1.6; }
+
+        header { 
+            text-align: center; 
+            padding: 40px 20px; 
+            font-size: 32px; 
+            font-weight: 900; 
+            letter-spacing: 10px; 
+            text-transform: uppercase;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 60px; }
+
+        .section-title {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 14px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+        }
+
+        /* Product Selection Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: var(--card);
+            border: 1px solid #222;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: #444;
+        }
+
+        .product-card img {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .product-price {
+            color: var(--text-dim);
+            font-size: 18px;
+            margin: 5px 0 20px;
+        }
+
+        .btn { 
+            background: white; color: black; border: none; padding: 15px; 
+            width: 100%; cursor: pointer; font-weight: 800; text-transform: uppercase;
+            transition: 0.3s; text-decoration: none; display: block; text-align: center;
+            font-size: 14px;
+        }
+        .btn:hover { background: #ccc; }
+
+        /* Order Box */
+        #selection-zone {
+            margin-top: 60px;
+            display: none; /* Hidden until a product is clicked */
+            scroll-margin-top: 50px;
+        }
+
+        .order-box {
+            background: #111;
+            border: 1px solid #ffffff33;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        select { 
+            width: 100%;
+            padding: 15px; 
+            background: #000; 
+            border: 1px solid #333; 
+            color: white; 
+            margin: 10px 0 20px;
+            font-size: 16px;
+        }
+
+        footer { text-align: center; padding: 60px 20px; color: #444; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>NOVEXA</header>
+
+<div class="container">
+    <div class="section-title">Current Drop</div>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="WhatsApp Image 2026-03-19 at 6.56.15 PM.jpeg" alt="Sinister Tee">
+            <p class="product-name">SINISTER TEE</p>
+            <p class="product-price">165 TTD</p>
+            <button class="btn" onclick="openOrder('SINISTER TEE')">Select Item</button>
+        </div>
+    </div>
+
+    <div id="selection-zone">
+        <div class="order-box">
+            <h3 id="selected-item-name" style="text-align:center; margin-top:0;">ITEM</h3>
+            <label style="font-size: 12px; color: #888; text-transform: uppercase;">Select Size</label>
+            <select id="size-select">
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+                <option value="X-Large">X-Large</option>
+            </select>
+            <button class="btn" onclick="sendToWhatsApp()" style="background: #25D366; color: white;">Confirm & Message</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>NOVEXA APPAREL XCI | TRINIDAD & TOBAGO</p>
+    <p>Instagram: @novexa.apparel.xci</p>
+</footer>
+
+<script>
+    let currentItem = "";
+
+    function openOrder(name) {
+        currentItem = name;
+        document.getElementById('selected-item-name').innerText = name;
+        document.getElementById('selection-zone').style.display = 'block';
+        window.location.hash = 'selection-zone';
+    }
+
+    function sendToWhatsApp() {
+        const size = document.getElementById('size-select').value;
+        const phoneNumber = "18682725015";
+        
+        const message = `*NEW ORDER - NOVEXA*%0A` +
+                        `--------------------------%0A` +
+                        `*Item:* ${currentItem}%0A` +
+                        `*Size:* ${size}%0A` +
+                        `*Price:* 165 TTD%0A%0A` +
+                        `_Please let me know how I can pay/collect._`;
+
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`);
+    }
+</script>
+
+</body>
+</html>
